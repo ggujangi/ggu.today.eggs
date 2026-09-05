@@ -1,0 +1,4 @@
+<resources>
+
+    <style name="Theme.TodayEggs" parent="Theme.MaterialComponents.Light" />
+</resources>
