@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TodayEggs</string>
-    <string name="title_feature">home</string>
+    <string name="title_home">home</string>
+    <string name="title_calendar">calendar</string>
 </resources>
