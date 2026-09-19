@@ -24,5 +24,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "TodayEggs"
 include(":app")
-include(":feature:home")
-include(":feature:calendar")
+include(":feature:home:api")
+include(":feature:home:impl")
+include(":feature:calendar:api")
+include(":feature:calendar:impl")
