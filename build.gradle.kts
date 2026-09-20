@@ -6,4 +6,5 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.plugin.serialization) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.android.dynamic.feature) apply false
+    alias(libs.plugins.hilt) apply false
 }
