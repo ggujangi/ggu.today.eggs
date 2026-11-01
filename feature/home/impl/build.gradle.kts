@@ -36,6 +36,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.kotlinx.datetime)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.hilt.navigation.compose)
+
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
