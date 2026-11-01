@@ -27,6 +27,8 @@ fun HomeScreen(
     ) {
         DateHeader(
             date = homeUiState.currentDate,
+            canGoPrevious = homeUiState.canGoPrevious,
+            canGoNext = homeUiState.canGoNext,
             goToPreviousDay = { viewModel.moveToPreviousDay() },
             goToNextDay = { viewModel.moveToNextDay() }
         )

@@ -21,6 +21,9 @@ class HomeViewModel @Inject constructor(
     private val dateProvider: DateProvider,
 ) : ViewModel() {
 
+    private val minDate = dateProvider.getMinDate()
+    private val maxDate = dateProvider.getMaxDate()
+
     private val _selectedDate = MutableStateFlow(dateProvider.getToday())
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -30,6 +33,8 @@ class HomeViewModel @Inject constructor(
                 emit(
                     HomeUiState(
                         currentDate = date,
+                        canGoPrevious = date > minDate,
+                        canGoNext = date < maxDate
                     )
                 )
             }
