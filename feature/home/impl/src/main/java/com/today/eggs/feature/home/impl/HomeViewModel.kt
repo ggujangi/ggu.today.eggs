@@ -10,6 +10,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import kotlinx.datetime.DatePeriod
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,4 +42,11 @@ class HomeViewModel @Inject constructor(
             )
         )
 
+    fun moveToPreviousDay() {
+        _selectedDate.update { it.minus(DatePeriod(days = 1)) }
+    }
+
+    fun moveToNextDay() {
+        _selectedDate.update { it.plus(DatePeriod(days = 1)) }
+    }
 }

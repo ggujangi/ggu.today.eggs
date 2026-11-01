@@ -1,7 +1,8 @@
 package com.today.eggs.feature.home.impl
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -18,13 +19,16 @@ fun HomeScreen(
 
     val homeUiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Box(
+    Column(
         modifier = modifier
-            .fillMaxSize(),
-        contentAlignment = Alignment.Center
+            .fillMaxSize()
+            .safeDrawingPadding(),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         DateHeader(
             date = homeUiState.currentDate,
+            goToPreviousDay = { viewModel.moveToPreviousDay() },
+            goToNextDay = { viewModel.moveToNextDay() }
         )
     }
 }
