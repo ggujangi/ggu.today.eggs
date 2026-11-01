@@ -1,5 +1,6 @@
 package com.today.eggs.feature.home.impl.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +32,7 @@ fun DateHeader(
     canGoNext: Boolean = true,
     goToPreviousDay: () -> Unit = {},
     goToNextDay: () -> Unit = {},
+    onTextClick: () -> Unit = {},
 ) {
     val dateString = "${date.year}.${date.monthNumber}.${date.dayOfMonth}"
 
@@ -41,7 +43,6 @@ fun DateHeader(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-
         if (canGoPrevious) {
             IconButton(onClick = goToPreviousDay) {
                 Icon(
@@ -55,7 +56,9 @@ fun DateHeader(
 
         Text(
             text = dateString,
-            modifier = Modifier,
+            modifier = Modifier
+                .clickable(onClick = onTextClick)
+                .padding(8.dp),
             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
             color = MaterialTheme.colorScheme.primary,
             textAlign = TextAlign.Center,

@@ -12,17 +12,18 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.datetime.DatePeriod
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val dateProvider: DateProvider,
+    dateProvider: DateProvider,
 ) : ViewModel() {
 
-    private val minDate = dateProvider.getMinDate()
-    private val maxDate = dateProvider.getMaxDate()
+    val minDate = dateProvider.getMinDate()
+    val maxDate = dateProvider.getMaxDate()
 
     private val _selectedDate = MutableStateFlow(dateProvider.getToday())
 
@@ -34,7 +35,7 @@ class HomeViewModel @Inject constructor(
                     HomeUiState(
                         currentDate = date,
                         canGoPrevious = date > minDate,
-                        canGoNext = date < maxDate
+                        canGoNext = date < maxDate,
                     )
                 )
             }
@@ -44,14 +45,26 @@ class HomeViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = HomeUiState(
                 currentDate = dateProvider.getToday(),
+                canGoPrevious = true,
+                canGoNext = false,
             )
         )
 
     fun moveToPreviousDay() {
-        _selectedDate.update { it.minus(DatePeriod(days = 1)) }
+        if (_selectedDate.value > minDate) {
+            _selectedDate.update { it.minus(DatePeriod(days = 1)) }
+        }
     }
 
     fun moveToNextDay() {
-        _selectedDate.update { it.plus(DatePeriod(days = 1)) }
+        if (_selectedDate.value < maxDate) {
+            _selectedDate.update { it.plus(DatePeriod(days = 1)) }
+        }
+    }
+
+    fun onDateSelected(date: LocalDate) {
+        if (date in minDate..maxDate) {
+            _selectedDate.value = date
+        }
     }
 }
