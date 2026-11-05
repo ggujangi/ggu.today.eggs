@@ -26,6 +26,7 @@ rootProject.name = "TodayEggs"
 include(":app")
 include(":core:model")
 include(":core:data")
+include(":core:domain")
 include(":feature:home:api")
 include(":feature:home:impl")
 include(":feature:calendar:api")
